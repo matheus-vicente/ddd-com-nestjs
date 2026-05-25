@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2023",
     "sourceMap": true,
-    "rootDir": "./",
+    "rootDir": "src",
     "outDir": "./dist",
     "incremental": true,
     "skipLibCheck": true,
@@ -40,12 +40,11 @@
       ]
     }
   },
-  "include": [
-    "src/**/*" // <--- Garante que ele SÓ vai compilar o que está na src
-  ],
   "exclude": [
     "node_modules",
+    "test",
     "dist",
+    "prisma.config.ts",
     "**/*spec.ts"
-  ],
+  ]
 }

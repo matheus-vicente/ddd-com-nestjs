@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/infra/persistence/prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Vaga {
+  id         String   @id @default(uuid())
+  codigo     String   @unique
+  tipo       TipoVaga @default(PADRAO)
+  disponivel Boolean  @default(true)
+
+  @@map("vagas")
+}
+
+enum TipoVaga {
+  PADRAO
+  CADEIRANTE
+  IDOSO
+  MANUTENCAO
+}
