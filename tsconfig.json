@@ -22,7 +22,6 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "types": [
-      "jest",
       "node"
     ],
     "paths": {
@@ -45,6 +44,6 @@
     "test",
     "dist",
     "prisma.config.ts",
-    "**/*spec.ts"
+    "vitest.config.ts",
   ]
 }

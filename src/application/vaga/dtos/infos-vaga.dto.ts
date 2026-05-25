@@ -2,49 +2,43 @@ import { BadRequestException } from "@nestjs/common";
 
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
 
-type InfosVagaDTOType = {
+export type InfosVagaDTOType = {
   codigo: string;
-  tipo: string;
+  tipo?: string;
 };
 
 export class InfosVagaDTO {
   private constructor(
     private readonly _codigo: string,
-    private readonly _tipo: TipoVaga,
+    private readonly _tipo?: TipoVaga,
   ) {}
 
-  static validar(data: unknown): InfosVagaDTO {
+  static validar(data: InfosVagaDTOType): InfosVagaDTO {
     const errors: string[] = [];
 
     if (typeof data !== "object" || data === null) {
       throw new BadRequestException("Body inválido");
     }
 
-    const body = data as InfosVagaDTOType;
+    const body = data;
 
     if (
       !body.codigo ||
       typeof body.codigo !== "string" ||
       body.codigo.trim() === ""
     ) {
-      errors.push("codigo: obrigatório e deve ser uma string não vazia");
-    }
-
-    const tiposValidos = Object.values(TipoVaga);
-    if (
-      !body.tipo.toUpperCase ||
-      !tiposValidos.includes(body.tipo.toUpperCase() as TipoVaga)
-    ) {
-      errors.push(`tipo: deve ser um dos valores: ${tiposValidos.join(", ")}`);
+      errors.push("O campo CODIGO deve ser preenchido");
     }
 
     if (errors.length > 0) {
       throw new BadRequestException({ message: "Dados inválidos", errors });
     }
 
+    const { codigo, tipo } = body;
+
     const dto = new InfosVagaDTO(
-      body.codigo.trim(),
-      body.tipo.toUpperCase() as TipoVaga,
+      codigo.trim(),
+      tipo ? (tipo.toUpperCase() as TipoVaga) : undefined,
     );
 
     return dto;
@@ -54,7 +48,7 @@ export class InfosVagaDTO {
     return this._codigo;
   }
 
-  get tipo(): TipoVaga {
+  get tipo(): TipoVaga | undefined {
     return this._tipo;
   }
 }

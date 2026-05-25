@@ -6,7 +6,7 @@ import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
 export interface VagaProps {
   id: string;
   codigo: string;
-  tipo: TipoVaga;
+  tipo?: TipoVaga;
   disponivel: boolean;
 }
 
@@ -27,7 +27,7 @@ export class Vaga {
 
     this._id = id;
     this._codigo = codigo;
-    this._tipo = tipo === null ? TipoVaga.PADRAO : tipo;
+    this._tipo = tipo === undefined ? TipoVaga.PADRAO : tipo;
     this._disponivel = disponivel;
   }
 
