@@ -18,7 +18,7 @@ export class CriarVagaController {
     const vaga = await this.useCase.execute(vagaDTO);
 
     return new VagaResponseDTO(
-      vaga.id,
+      vaga.id.toString(),
       vaga.codigo,
       vaga.tipo.toString(),
       vaga.disponivel,

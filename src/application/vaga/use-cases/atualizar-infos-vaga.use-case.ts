@@ -28,7 +28,10 @@ export class AtualizarInfosVagaUseCase {
       throw new DomainException("Este código já está cadastrado");
     }
 
-    vagaExiste.atualizarInfos(vagaDTO);
+    vagaExiste.atualizarInfos({
+      codigo: vagaDTO.codigo,
+      tipo: vagaDTO.tipo,
+    });
 
     const vaga = await this.vagasRepository.salvar(vagaExiste);
 

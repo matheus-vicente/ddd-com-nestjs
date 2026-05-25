@@ -1,27 +1,22 @@
-import { randomUUID } from "node:crypto";
-
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
 import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
+import { EntityIdUnico } from "../shared/value-objects/entity-id-unico.vo.js";
 
 export interface VagaProps {
-  id: string;
+  id: EntityIdUnico;
   codigo: string;
   tipo?: TipoVaga;
   disponivel: boolean;
 }
 
 export class Vaga {
-  private readonly _id: string;
+  private readonly _id: EntityIdUnico;
   private _codigo: string;
   private _tipo: TipoVaga;
   private _disponivel: boolean;
 
   private constructor({ id, codigo, tipo, disponivel }: VagaProps) {
-    if (!id || id.length === 0) {
-      throw new DomainException("O campo ID não pode ser nulo");
-    }
-
-    if (codigo === null) {
+    if (!codigo || codigo.trim().length === 0) {
       throw new DomainException("O campo CÓDIGO não pode ser nulo");
     }
 
@@ -32,7 +27,8 @@ export class Vaga {
   }
 
   public static create(props: Omit<VagaProps, "id" | "disponivel">): Vaga {
-    const id = randomUUID();
+    const id = new EntityIdUnico();
+
     const disponivel = true;
 
     return new Vaga({ id, disponivel, ...props });
@@ -70,7 +66,7 @@ export class Vaga {
     codigo,
     tipo,
   }: Omit<VagaProps, "id" | "disponivel">): void {
-    if (!codigo) {
+    if (!codigo || codigo.trim().length === 0) {
       throw new DomainException("O campo CÓDIGO não pode ser nulo");
     }
 
@@ -81,7 +77,7 @@ export class Vaga {
     this._codigo = codigo;
   }
 
-  public get id(): string {
+  public get id(): EntityIdUnico {
     return this._id;
   }
 

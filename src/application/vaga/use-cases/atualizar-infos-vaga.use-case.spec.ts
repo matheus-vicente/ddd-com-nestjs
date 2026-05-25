@@ -19,12 +19,10 @@ describe("AtualizarInfosVagaUseCase", () => {
 
   describe("execute", () => {
     it("deve atualizar o código de uma vaga com sucesso", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vaga = Vaga.create({
         codigo: "A-01",
         tipo: TipoVaga.PADRAO,
       });
-
-      const vaga = Vaga.create(vagaDTO);
       vagasRepository.vagas.push(vaga);
 
       const vagaAtualizadaDTO = InfosVagaDTO.validar({
@@ -32,19 +30,17 @@ describe("AtualizarInfosVagaUseCase", () => {
         tipo: TipoVaga.PADRAO,
       });
 
-      const result = await sut.execute(vaga.id, vagaAtualizadaDTO);
+      const result = await sut.execute(vaga.id.toString(), vagaAtualizadaDTO);
 
-      expect(result.id).toBe(vaga.id);
+      expect(result.id.equals(vaga.id)).toBe(true);
       expect(result.codigo).toBe("A-99");
     });
 
     it("deve atualizar o tipo de uma vaga com sucesso", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vaga = Vaga.create({
         codigo: "B-01",
         tipo: TipoVaga.PADRAO,
       });
-
-      const vaga = Vaga.create(vagaDTO);
       vagasRepository.vagas.push(vaga);
 
       const vagaAtualizadaDTO = InfosVagaDTO.validar({
@@ -52,7 +48,7 @@ describe("AtualizarInfosVagaUseCase", () => {
         tipo: TipoVaga.MANUTENCAO,
       });
 
-      const result = await sut.execute(vaga.id, vagaAtualizadaDTO);
+      const result = await sut.execute(vaga.id.toString(), vagaAtualizadaDTO);
 
       expect(result.tipo).toBe(TipoVaga.MANUTENCAO);
     });
@@ -66,7 +62,7 @@ describe("AtualizarInfosVagaUseCase", () => {
         tipo: TipoVaga.PADRAO,
       });
 
-      await sut.execute(vaga.id, vagaAtualizadaDTO);
+      await sut.execute(vaga.id.toString(), vagaAtualizadaDTO);
 
       expect(vagasRepository.vagas[0].codigo).toBe("C-99");
     });
@@ -80,9 +76,9 @@ describe("AtualizarInfosVagaUseCase", () => {
         tipo: TipoVaga.PADRAO,
       });
 
-      const result = await sut.execute(vaga.id, vagaAtualizadaDTO);
+      const result = await sut.execute(vaga.id.toString(), vagaAtualizadaDTO);
 
-      expect(result.id).toBe(vaga.id);
+      expect(result.id.equals(vaga.id)).toBe(true);
       expect(result.disponivel).toBe(vaga.disponivel);
     });
 
@@ -107,9 +103,9 @@ describe("AtualizarInfosVagaUseCase", () => {
         tipo: TipoVaga.PADRAO,
       });
 
-      await expect(sut.execute(vagaA.id, vagaAtualizadaDTO)).rejects.toThrow(
-        DomainException,
-      );
+      await expect(
+        sut.execute(vagaA.id.toString(), vagaAtualizadaDTO),
+      ).rejects.toThrow(DomainException);
     });
 
     it("não deve alterar o repositório quando vaga não é encontrada", async () => {
@@ -141,7 +137,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       });
 
       try {
-        await sut.execute(vagaA.id, vagaAtualizadaDTO);
+        await sut.execute(vagaA.id.toString(), vagaAtualizadaDTO);
       } catch {
         // ignora erro esperado
       }

@@ -35,7 +35,7 @@ export class PrismaVagasRepository implements IVagasRepository {
 
   public async salvar(vaga: Vaga): Promise<Vaga> {
     const prismaVaga = await this.prisma.vaga.upsert({
-      where: { id: vaga.id },
+      where: { id: vaga.id.toString() },
 
       create: VagaMapper.fromDomain(vaga),
 

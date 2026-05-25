@@ -9,7 +9,7 @@ export class InMemoryVagasRepository implements IVagasRepository {
   }
 
   async buscarPorId(id: string): Promise<Vaga | null> {
-    const vaga = this.vagas.find((item) => item.id === id);
+    const vaga = this.vagas.find((item) => item.id.toString() === id);
 
     return new Promise((resolve) => resolve(vaga ? vaga : null));
   }
@@ -33,7 +33,7 @@ export class InMemoryVagasRepository implements IVagasRepository {
   }
 
   async deletar(id: string): Promise<void> {
-    const itemIndex = this.vagas.findIndex((item) => item.id === id);
+    const itemIndex = this.vagas.findIndex((item) => item.id.toString() === id);
 
     if (itemIndex >= 0) {
       this.vagas.splice(itemIndex, 1);
