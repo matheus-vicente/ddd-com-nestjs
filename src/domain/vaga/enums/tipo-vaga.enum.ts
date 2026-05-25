@@ -1,0 +1,6 @@
+export enum TipoVaga {
+  PADRAO = "PADRAO",
+  CADEIRANTE = "CADEIRANTE",
+  IDOSO = "IDOSO",
+  MANUTENCAO = "MANUTENCAO",
+}
