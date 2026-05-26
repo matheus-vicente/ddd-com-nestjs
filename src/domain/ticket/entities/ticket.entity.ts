@@ -9,7 +9,7 @@ import { TipoTarifa } from "@domain/ticket/enums/tipo-tarifa.enum.js";
 export interface TicketProps {
   id: EntityIdUnico;
   codigo: CodigoTicket;
-  vagaId: string;
+  vagaId: EntityIdUnico;
   status: StatusTicket;
   placa: Placa;
   tarifa: Tarifa;
@@ -19,7 +19,7 @@ export interface TicketProps {
 }
 
 export interface CreateTicketProps {
-  vagaId: string;
+  vagaId: EntityIdUnico;
   placa: string;
   tipoTarifa: TipoTarifa;
   valor: number;
@@ -30,7 +30,7 @@ export interface CreateTicketProps {
 export interface RehydrateTarifa {
   id: string;
   codigo: string;
-  vagaId: string;
+  vagaId: EntityIdUnico;
   status: StatusTicket;
   placa: string;
   tipoTarifa: TipoTarifa;
@@ -44,7 +44,7 @@ export interface RehydrateTarifa {
 export class Ticket {
   private readonly _id: EntityIdUnico;
   private _codigo: CodigoTicket;
-  private _vagaId: string;
+  private _vagaId: EntityIdUnico;
   private _status: StatusTicket;
   private _placa: Placa;
   private _tarifa: Tarifa;
@@ -197,7 +197,7 @@ export class Ticket {
   get codigo(): CodigoTicket {
     return this._codigo;
   }
-  get vagaId(): string {
+  get vagaId(): EntityIdUnico {
     return this._vagaId;
   }
   get status(): StatusTicket {

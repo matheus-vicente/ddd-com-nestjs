@@ -20,7 +20,7 @@ export class Placa {
     this._placa = placaLimpa;
   }
 
-  get name(): string {
+  public toString(): string {
     return this._placa;
   }
 }
