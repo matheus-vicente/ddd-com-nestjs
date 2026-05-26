@@ -1,4 +1,4 @@
-export class EntityIdUnico {
+export class EntityIdUnicoVO {
   private readonly valor: string;
 
   private static readonly UUID_REGEX =
@@ -7,7 +7,7 @@ export class EntityIdUnico {
   constructor(id?: string) {
     const resolvedId = id ?? crypto.randomUUID();
 
-    if (!EntityIdUnico.UUID_REGEX.test(resolvedId)) {
+    if (!EntityIdUnicoVO.UUID_REGEX.test(resolvedId)) {
       throw new Error(`Este ID não é válido`);
     }
 
@@ -18,7 +18,7 @@ export class EntityIdUnico {
     return this.valor;
   }
 
-  equals(other: EntityIdUnico): boolean {
+  equals(other: EntityIdUnicoVO): boolean {
     return this.valor === other.valor;
   }
 }

@@ -5,7 +5,7 @@ import { InfosVagaDTO } from "@application/vaga/dtos/infos-vaga.dto.js";
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
 import { NaoEncontradoException } from "@domain/vaga/exceptions/nao-encontrado.exception.js";
 import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
-import { EntityIdUnico } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnicoVO } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
 
 @Injectable()
 export class AtualizarInfosVagaUseCase {
@@ -16,7 +16,7 @@ export class AtualizarInfosVagaUseCase {
 
   public async execute(id: string, vagaDTO: InfosVagaDTO): Promise<Vaga> {
     const vagaExiste = await this.vagasRepository.buscarPorId(
-      new EntityIdUnico(id),
+      new EntityIdUnicoVO(id),
     );
 
     if (!vagaExiste) {
