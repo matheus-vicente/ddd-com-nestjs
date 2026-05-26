@@ -1,6 +1,6 @@
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
-import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
-import { EntityIdUnicoVO } from "../shared/value-objects/entity-id-unico.vo.js";
+import { DomainException } from "@domain/exceptions/domain.exception.js";
+import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 
 export interface VagaProps {
   id: EntityIdUnicoVO;

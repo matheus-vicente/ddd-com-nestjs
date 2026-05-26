@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import { CriarVagaUseCase } from "@application/vaga/use-cases/criar-vaga.use-case.js";
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
-import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
+import { DomainException } from "@domain/exceptions/domain.exception.js";
 import { InMemoryVagasRepository } from "@infra/persistence/in-memory/in-memory-vagas.repository.js";
 import { InfosVagaDTO } from "../dtos/infos-vaga.dto.js";
 

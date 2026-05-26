@@ -4,7 +4,7 @@ import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js"
 import { PrismaService } from "@infra/persistence/prisma/prisma.service.js";
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
 import { VagaMapper } from "@infra/persistence/prisma/mappers/vaga.mapper.js";
-import { EntityIdUnicoVO } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 
 @Injectable()
 export class PrismaVagasRepository implements IVagasRepository {

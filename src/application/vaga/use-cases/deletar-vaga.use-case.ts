@@ -1,9 +1,9 @@
 import { Inject, Injectable } from "@nestjs/common";
 
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
-import { EntityIdUnicoVO } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
-import { NaoEncontradoException } from "@domain/vaga/exceptions/nao-encontrado.exception.js";
-import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
+import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
+import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
+import { DomainException } from "@domain/exceptions/domain.exception.js";
 
 @Injectable()
 export class DeletarVagaUseCase {

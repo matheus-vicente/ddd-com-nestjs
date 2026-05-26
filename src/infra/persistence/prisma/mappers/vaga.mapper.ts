@@ -1,6 +1,6 @@
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
-import { EntityIdUnicoVO } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 import { Vaga as PrismaVaga } from "@infra/persistence/prisma/client/client.js";
 
 export class VagaMapper {

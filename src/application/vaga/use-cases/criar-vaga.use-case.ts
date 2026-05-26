@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
-import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
+import { DomainException } from "@domain/exceptions/domain.exception.js";
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
 import { InfosVagaDTO } from "@application/vaga/dtos/infos-vaga.dto.js";
 

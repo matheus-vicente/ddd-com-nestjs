@@ -1,6 +1,6 @@
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
-import { EntityIdUnicoVO } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 
 export class InMemoryVagasRepository implements IVagasRepository {
   public vagas: Vaga[] = [];

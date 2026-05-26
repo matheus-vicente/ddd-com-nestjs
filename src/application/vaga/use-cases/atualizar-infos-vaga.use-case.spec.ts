@@ -6,8 +6,8 @@ import { InfosVagaDTO } from "@application/vaga/dtos/infos-vaga.dto.js";
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
 import { InMemoryVagasRepository } from "@infra/persistence/in-memory/in-memory-vagas.repository.js";
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
-import { NaoEncontradoException } from "@domain/vaga/exceptions/nao-encontrado.exception.js";
-import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
+import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
+import { DomainException } from "@domain/exceptions/domain.exception.js";
 
 describe("AtualizarInfosVagaUseCase", () => {
   let sut: AtualizarInfosVagaUseCase;

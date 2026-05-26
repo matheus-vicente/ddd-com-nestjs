@@ -7,8 +7,8 @@ import {
 } from "@nestjs/common";
 import { Request, Response } from "express";
 
-import { DomainException } from "@domain/vaga/exceptions/domain.exception.js";
-import { NaoEncontradoException } from "@domain/vaga/exceptions/nao-encontrado.exception.js";
+import { DomainException } from "@domain/exceptions/domain.exception.js";
+import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {

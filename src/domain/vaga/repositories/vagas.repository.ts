@@ -1,5 +1,5 @@
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
-import { EntityIdUnicoVO } from "../shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 
 export abstract class IVagasRepository {
   abstract listar(): Promise<Vaga[]>;
