@@ -104,6 +104,10 @@ describe("AtualizarInfosVagaUseCase", () => {
         tipo: TipoVaga.PADRAO,
       });
 
+      expect(
+        (await sut.execute(vagaB.id.toString(), vagaAtualizadaDTO)).codigo,
+      ).toBe("E-02");
+
       await expect(
         sut.execute(vagaA.id.toString(), vagaAtualizadaDTO),
       ).rejects.toThrow(DomainException);

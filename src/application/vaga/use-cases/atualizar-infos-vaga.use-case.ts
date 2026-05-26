@@ -23,12 +23,14 @@ export class AtualizarInfosVagaUseCase {
       throw new NaoEncontradoException("Vaga não encontrada");
     }
 
-    const codigoExiste = await this.vagasRepository.buscarPorCodigo(
-      vagaDTO.codigo,
-    );
+    if (vagaExiste.codigo.toUpperCase() !== vagaDTO.codigo.toUpperCase()) {
+      const codigoExiste = await this.vagasRepository.buscarPorCodigo(
+        vagaDTO.codigo,
+      );
 
-    if (codigoExiste) {
-      throw new DomainException("Este código já está cadastrado");
+      if (codigoExiste) {
+        throw new DomainException("Este código já está cadastrado");
+      }
     }
 
     vagaExiste.atualizarInfos({
