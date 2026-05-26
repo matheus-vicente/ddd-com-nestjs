@@ -4,14 +4,15 @@ import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js"
 import { PrismaService } from "@infra/persistence/prisma/prisma.service.js";
 import { Vaga } from "@domain/vaga/entities/vaga.entity.js";
 import { VagaMapper } from "@infra/persistence/prisma/mappers/vaga.mapper.js";
+import { EntityIdUnico } from "@domain/vaga/shared/value-objects/entity-id-unico.vo.js";
 
 @Injectable()
 export class PrismaVagasRepository implements IVagasRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async buscarPorId(id: string): Promise<Vaga | null> {
+  async buscarPorId(id: EntityIdUnico): Promise<Vaga | null> {
     const prismaVaga = await this.prisma.vaga.findUnique({
-      where: { id },
+      where: { id: id.toString() },
     });
 
     if (!prismaVaga) {
@@ -55,7 +56,7 @@ export class PrismaVagasRepository implements IVagasRepository {
     return prismaVagas.map((item) => VagaMapper.toDomain(item));
   }
 
-  async deletar(id: string): Promise<void> {
-    await this.prisma.vaga.delete({ where: { id } });
+  async deletar(id: EntityIdUnico): Promise<void> {
+    await this.prisma.vaga.delete({ where: { id: id.toString() } });
   }
 }

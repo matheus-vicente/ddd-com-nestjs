@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import { AtualizarInfosVagaUseCase } from "@application/vaga/use-cases/atualizar-infos-vaga.use-case.js";
@@ -89,7 +90,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       });
 
       await expect(
-        sut.execute("id-inexistente", vagaAtualizadaDTO),
+        sut.execute(randomUUID(), vagaAtualizadaDTO),
       ).rejects.toThrow(NaoEncontradoException);
     });
 
