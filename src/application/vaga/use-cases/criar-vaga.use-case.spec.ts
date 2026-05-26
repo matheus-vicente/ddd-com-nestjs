@@ -17,7 +17,7 @@ describe("CriarVagaUseCase", () => {
 
   describe("execute", () => {
     it("deve criar uma vaga com sucesso com tipo padrão", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "A-01",
         tipo: TipoVaga.PADRAO,
       });
@@ -32,7 +32,7 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve criar uma vaga com tipo MANUTENCAO", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "B-02",
         tipo: TipoVaga.MANUTENCAO,
       });
@@ -46,7 +46,7 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve criar uma vaga sem tipo e usar PADRAO como padrão", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "C-03",
       });
 
@@ -56,7 +56,7 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve persistir a vaga no repositório após criação", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "D-04",
         tipo: TipoVaga.PADRAO,
       });
@@ -68,7 +68,7 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve lançar DomainException quando código já está cadastrado", async () => {
-      const vagaDTO: InfosVagaDTO = InfosVagaDTO.validar({
+      const vagaDTO: InfosVagaDTO = new InfosVagaDTO({
         codigo: "A-01",
         tipo: TipoVaga.PADRAO,
       });
@@ -82,7 +82,7 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("não deve criar segunda vaga com mesmo código", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "A-01",
         tipo: TipoVaga.PADRAO,
       });
@@ -93,17 +93,17 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve permitir criar múltiplas vagas com códigos distintos", async () => {
-      const vagaDTO1 = InfosVagaDTO.validar({
+      const vagaDTO1 = new InfosVagaDTO({
         codigo: "A-01",
         tipo: TipoVaga.PADRAO,
       });
 
-      const vagaDTO2 = InfosVagaDTO.validar({
+      const vagaDTO2 = new InfosVagaDTO({
         codigo: "A-02",
         tipo: TipoVaga.PADRAO,
       });
 
-      const vagaDTO3 = InfosVagaDTO.validar({
+      const vagaDTO3 = new InfosVagaDTO({
         codigo: "A-03",
         tipo: TipoVaga.PADRAO,
       });
@@ -116,7 +116,7 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve retornar a vaga com disponível igual a true por padrão", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "E-05",
         tipo: TipoVaga.PADRAO,
       });
@@ -127,12 +127,12 @@ describe("CriarVagaUseCase", () => {
     });
 
     it("deve gerar IDs únicos para vagas distintas", async () => {
-      const vagaDTO1 = InfosVagaDTO.validar({
+      const vagaDTO1 = new InfosVagaDTO({
         codigo: "E-05",
         tipo: TipoVaga.PADRAO,
       });
 
-      const vagaDTO2 = InfosVagaDTO.validar({
+      const vagaDTO2 = new InfosVagaDTO({
         codigo: "E-06",
         tipo: TipoVaga.PADRAO,
       });

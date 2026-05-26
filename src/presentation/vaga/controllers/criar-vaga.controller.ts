@@ -13,7 +13,7 @@ export class CriarVagaController {
 
   @Post()
   async handle(@Body() body: InfosVagaDTOType): Promise<VagaResponseDTO> {
-    const vagaDTO = InfosVagaDTO.validar(body);
+    const vagaDTO = new InfosVagaDTO(body);
 
     const vaga = await this.useCase.execute(vagaDTO);
 

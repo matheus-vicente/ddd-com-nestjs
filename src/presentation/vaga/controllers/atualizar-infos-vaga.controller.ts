@@ -16,7 +16,7 @@ export class AtualizarInfosVagaController {
     @Param("id") id: string,
     @Body() body: InfosVagaDTOType,
   ): Promise<VagaResponseDTO> {
-    const vagaDTO = InfosVagaDTO.validar(body);
+    const vagaDTO = new InfosVagaDTO(body);
 
     const vaga = await this.useCase.execute(id, vagaDTO);
 

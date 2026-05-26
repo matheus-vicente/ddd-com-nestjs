@@ -25,17 +25,17 @@ describe("ListarVagasUseCase", () => {
     });
 
     it("deve retornar todas as vagas cadastradas", async () => {
-      const vagaDTO1 = InfosVagaDTO.validar({
+      const vagaDTO1 = new InfosVagaDTO({
         codigo: "A-01",
         tipo: TipoVaga.PADRAO,
       });
 
-      const vagaDTO2 = InfosVagaDTO.validar({
+      const vagaDTO2 = new InfosVagaDTO({
         codigo: "A-02",
         tipo: TipoVaga.PADRAO,
       });
 
-      const vagaDTO3 = InfosVagaDTO.validar({
+      const vagaDTO3 = new InfosVagaDTO({
         codigo: "A-03",
         tipo: TipoVaga.PADRAO,
       });
@@ -52,7 +52,7 @@ describe("ListarVagasUseCase", () => {
     });
 
     it("deve retornar uma lista contendo instâncias de Vaga", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "B-01",
         tipo: TipoVaga.PADRAO,
       });
@@ -67,7 +67,7 @@ describe("ListarVagasUseCase", () => {
     });
 
     it("deve retornar vagas com os dados corretos", async () => {
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "C-01",
         tipo: TipoVaga.MANUTENCAO,
       });
@@ -88,7 +88,7 @@ describe("ListarVagasUseCase", () => {
       const resultAntes = await sut.execute();
       expect(resultAntes).toHaveLength(0);
 
-      const vagaDTO = InfosVagaDTO.validar({
+      const vagaDTO = new InfosVagaDTO({
         codigo: "D-01",
         tipo: TipoVaga.MANUTENCAO,
       });

@@ -8,34 +8,25 @@ export type InfosVagaDTOType = {
 };
 
 export class InfosVagaDTO {
-  private constructor(
-    private readonly _codigo: string,
-    private readonly _tipo?: TipoVaga,
-  ) {}
+  private readonly _codigo: string;
+  private readonly _tipo?: TipoVaga;
 
-  static validar(data: InfosVagaDTOType): InfosVagaDTO {
+  constructor(data: InfosVagaDTOType) {
     const message: string[] = ["Dados inválidos"];
 
     if (typeof data !== "object" || data === null) {
       throw new BadRequestException("Body inválido");
     }
 
-    const body = data;
+    const { codigo, tipo } = data;
 
-    if (
-      !body.codigo ||
-      typeof body.codigo !== "string" ||
-      body.codigo.trim() === ""
-    ) {
+    if (!codigo || typeof codigo !== "string" || codigo.trim() === "") {
       message.push("O campo CODIGO deve ser preenchido");
     }
 
     const tiposValidos = Object.values(TipoVaga);
 
-    if (
-      !!body.tipo &&
-      !tiposValidos.includes(body.tipo.toUpperCase() as TipoVaga)
-    ) {
+    if (!!tipo && !tiposValidos.includes(tipo.toUpperCase() as TipoVaga)) {
       message.push(
         `O campo TIPO deve ser um dos seguintes valores: ${tiposValidos.join(", ")}`,
       );
@@ -47,14 +38,8 @@ export class InfosVagaDTO {
       });
     }
 
-    const { codigo, tipo } = body;
-
-    const dto = new InfosVagaDTO(
-      codigo.trim(),
-      tipo ? (tipo.toUpperCase() as TipoVaga) : undefined,
-    );
-
-    return dto;
+    this._codigo = codigo.trim();
+    this._tipo = tipo ? (tipo.toUpperCase() as TipoVaga) : undefined;
   }
 
   get codigo(): string {

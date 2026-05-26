@@ -26,7 +26,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       });
       vagasRepository.vagas.push(vaga);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "A-99",
         tipo: TipoVaga.PADRAO,
       });
@@ -44,7 +44,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       });
       vagasRepository.vagas.push(vaga);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "B-01-NOVO",
         tipo: TipoVaga.MANUTENCAO,
       });
@@ -58,7 +58,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       const vaga = Vaga.create({ codigo: "C-01", tipo: TipoVaga.PADRAO });
       vagasRepository.vagas.push(vaga);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "C-99",
         tipo: TipoVaga.PADRAO,
       });
@@ -72,7 +72,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       const vaga = Vaga.create({ codigo: "D-01", tipo: TipoVaga.PADRAO });
       vagasRepository.vagas.push(vaga);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "D-99",
         tipo: TipoVaga.PADRAO,
       });
@@ -84,7 +84,7 @@ describe("AtualizarInfosVagaUseCase", () => {
     });
 
     it("deve lançar NaoEncontradoException quando vaga não existe", async () => {
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "X-01",
         tipo: TipoVaga.PADRAO,
       });
@@ -99,7 +99,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       const vagaB = Vaga.create({ codigo: "E-02", tipo: TipoVaga.PADRAO });
       vagasRepository.vagas.push(vagaA, vagaB);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "E-02",
         tipo: TipoVaga.PADRAO,
       });
@@ -117,7 +117,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       const vaga = Vaga.create({ codigo: "F-01", tipo: TipoVaga.PADRAO });
       vagasRepository.vagas.push(vaga);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "F-99",
         tipo: TipoVaga.PADRAO,
       });
@@ -136,7 +136,7 @@ describe("AtualizarInfosVagaUseCase", () => {
       const vagaB = Vaga.create({ codigo: "G-02", tipo: TipoVaga.PADRAO });
       vagasRepository.vagas.push(vagaA, vagaB);
 
-      const vagaAtualizadaDTO = InfosVagaDTO.validar({
+      const vagaAtualizadaDTO = new InfosVagaDTO({
         codigo: "G-02",
         tipo: TipoVaga.PADRAO,
       });
