@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
 
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
-import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnico } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
 import { DomainException } from "@domain/exceptions/domain.exception.js";
 
@@ -13,7 +13,7 @@ export class DeletarVagaUseCase {
   ) {}
 
   public async execute(id: string): Promise<void> {
-    const idValido = new EntityIdUnicoVO(id);
+    const idValido = new EntityIdUnico(id);
 
     const vaga = await this.vagasRepository.buscarPorId(idValido);
 

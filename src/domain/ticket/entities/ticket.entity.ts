@@ -1,4 +1,4 @@
-import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnico } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 import { StatusTicket } from "@domain/ticket/enums/status-ticket.enum.js";
 import { Placa } from "@domain/ticket/value-objects/placa.vo.js";
 import { Tarifa } from "@domain/ticket/value-objects/tarifa.vo.js";
@@ -7,7 +7,7 @@ import { DomainException } from "@domain/exceptions/domain.exception.js";
 import { TipoTarifa } from "@domain/ticket/enums/tipo-tarifa.enum.js";
 
 export interface TicketProps {
-  id: EntityIdUnicoVO;
+  id: EntityIdUnico;
   codigo: CodigoTicket;
   vagaId: string;
   status: StatusTicket;
@@ -42,7 +42,7 @@ export interface RehydrateTarifa {
 }
 
 export class Ticket {
-  private readonly _id: EntityIdUnicoVO;
+  private readonly _id: EntityIdUnico;
   private _codigo: CodigoTicket;
   private _vagaId: string;
   private _status: StatusTicket;
@@ -86,7 +86,7 @@ export class Ticket {
     valorAdicional,
     criadoEm,
   }: CreateTicketProps): Ticket {
-    const id = new EntityIdUnicoVO();
+    const id = new EntityIdUnico();
     const codigo = new CodigoTicket();
     const tarifa = this.mapearTarifa(tipoTarifa, valor, valorAdicional);
 
@@ -111,7 +111,7 @@ export class Ticket {
 
     return new Ticket({
       ...props,
-      id: new EntityIdUnicoVO(props.id),
+      id: new EntityIdUnico(props.id),
       codigo: new CodigoTicket(props.codigo),
       placa: new Placa(props.placa),
       tarifa,
@@ -191,7 +191,7 @@ export class Ticket {
     }
   }
 
-  get id(): EntityIdUnicoVO {
+  get id(): EntityIdUnico {
     return this._id;
   }
   get codigo(): CodigoTicket {

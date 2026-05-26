@@ -1,16 +1,16 @@
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
 import { DomainException } from "@domain/exceptions/domain.exception.js";
-import { EntityIdUnicoVO } from "@domain/shared/value-objects/entity-id-unico.vo.js";
+import { EntityIdUnico } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 
 export interface VagaProps {
-  id: EntityIdUnicoVO;
+  id: EntityIdUnico;
   codigo: string;
   tipo?: TipoVaga;
   disponivel: boolean;
 }
 
 export class Vaga {
-  private readonly _id: EntityIdUnicoVO;
+  private readonly _id: EntityIdUnico;
   private _codigo: string;
   private _tipo: TipoVaga;
   private _disponivel: boolean;
@@ -27,7 +27,7 @@ export class Vaga {
   }
 
   public static create(props: Omit<VagaProps, "id" | "disponivel">): Vaga {
-    const id = new EntityIdUnicoVO();
+    const id = new EntityIdUnico();
 
     const disponivel = true;
 
@@ -77,7 +77,7 @@ export class Vaga {
     this._codigo = codigo;
   }
 
-  public get id(): EntityIdUnicoVO {
+  public get id(): EntityIdUnico {
     return this._id;
   }
 
