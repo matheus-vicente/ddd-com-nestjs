@@ -14,7 +14,7 @@ export class InfosVagaDTO {
   ) {}
 
   static validar(data: InfosVagaDTOType): InfosVagaDTO {
-    const errors: string[] = [];
+    const message: string[] = ["Dados inválidos"];
 
     if (typeof data !== "object" || data === null) {
       throw new BadRequestException("Body inválido");
@@ -27,11 +27,24 @@ export class InfosVagaDTO {
       typeof body.codigo !== "string" ||
       body.codigo.trim() === ""
     ) {
-      errors.push("O campo CODIGO deve ser preenchido");
+      message.push("O campo CODIGO deve ser preenchido");
     }
 
-    if (errors.length > 0) {
-      throw new BadRequestException({ message: "Dados inválidos", errors });
+    const tiposValidos = Object.values(TipoVaga);
+
+    if (
+      !!body.tipo &&
+      !tiposValidos.includes(body.tipo.toUpperCase() as TipoVaga)
+    ) {
+      message.push(
+        `O campo TIPO deve ser um dos seguintes valores: ${tiposValidos.join(", ")}`,
+      );
+    }
+
+    if (message.length > 1) {
+      throw new BadRequestException({
+        message,
+      });
     }
 
     const { codigo, tipo } = body;

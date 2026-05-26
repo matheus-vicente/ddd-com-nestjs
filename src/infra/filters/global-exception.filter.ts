@@ -19,26 +19,27 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     let codigo = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    let mensagem = "Erro interno: " + exception.message;
+    let mensagens: string[] = ["Erro interno: " + exception.message];
 
     if (exception instanceof BadRequestException) {
-      mensagem = exception.message;
+      const { message } = exception.getResponse() as { message: string[] };
+      mensagens = message;
       codigo = HttpStatus.BAD_REQUEST;
     }
 
     if (exception instanceof DomainException) {
       codigo = HttpStatus.BAD_REQUEST;
-      mensagem = exception.message;
+      mensagens = [exception.message];
     }
 
     if (exception instanceof NaoEncontradoException) {
       codigo = HttpStatus.NOT_FOUND;
-      mensagem = exception.message;
+      mensagens = [exception.message];
     }
 
     response.status(400).json({
       codigo,
-      mensagem,
+      mensagens,
       timestamp: new Date().toISOString(),
       caminho: request.url,
     });
