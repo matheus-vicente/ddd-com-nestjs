@@ -178,6 +178,7 @@ export type VagaWhereInput = {
   codigo?: Prisma.StringFilter<"Vaga"> | string;
   tipo?: Prisma.EnumTipoVagaFilter<"Vaga"> | $Enums.TipoVaga;
   disponivel?: Prisma.BoolFilter<"Vaga"> | boolean;
+  tickets?: Prisma.TicketListRelationFilter;
 };
 
 export type VagaOrderByWithRelationInput = {
@@ -185,6 +186,7 @@ export type VagaOrderByWithRelationInput = {
   codigo?: Prisma.SortOrder;
   tipo?: Prisma.SortOrder;
   disponivel?: Prisma.SortOrder;
+  tickets?: Prisma.TicketOrderByRelationAggregateInput;
 };
 
 export type VagaWhereUniqueInput = Prisma.AtLeast<
@@ -196,6 +198,7 @@ export type VagaWhereUniqueInput = Prisma.AtLeast<
     NOT?: Prisma.VagaWhereInput | Prisma.VagaWhereInput[];
     tipo?: Prisma.EnumTipoVagaFilter<"Vaga"> | $Enums.TipoVaga;
     disponivel?: Prisma.BoolFilter<"Vaga"> | boolean;
+    tickets?: Prisma.TicketListRelationFilter;
   },
   "id" | "codigo"
 >;
@@ -229,6 +232,7 @@ export type VagaCreateInput = {
   codigo: string;
   tipo?: $Enums.TipoVaga;
   disponivel?: boolean;
+  tickets?: Prisma.TicketCreateNestedManyWithoutVagaInput;
 };
 
 export type VagaUncheckedCreateInput = {
@@ -236,6 +240,7 @@ export type VagaUncheckedCreateInput = {
   codigo: string;
   tipo?: $Enums.TipoVaga;
   disponivel?: boolean;
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutVagaInput;
 };
 
 export type VagaUpdateInput = {
@@ -243,6 +248,7 @@ export type VagaUpdateInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string;
   tipo?: Prisma.EnumTipoVagaFieldUpdateOperationsInput | $Enums.TipoVaga;
   disponivel?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  tickets?: Prisma.TicketUpdateManyWithoutVagaNestedInput;
 };
 
 export type VagaUncheckedUpdateInput = {
@@ -250,6 +256,7 @@ export type VagaUncheckedUpdateInput = {
   codigo?: Prisma.StringFieldUpdateOperationsInput | string;
   tipo?: Prisma.EnumTipoVagaFieldUpdateOperationsInput | $Enums.TipoVaga;
   disponivel?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutVagaNestedInput;
 };
 
 export type VagaCreateManyInput = {
@@ -294,6 +301,11 @@ export type VagaMinOrderByAggregateInput = {
   disponivel?: Prisma.SortOrder;
 };
 
+export type VagaScalarRelationFilter = {
+  is?: Prisma.VagaWhereInput;
+  isNot?: Prisma.VagaWhereInput;
+};
+
 export type StringFieldUpdateOperationsInput = {
   set?: string;
 };
@@ -306,6 +318,126 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean;
 };
 
+export type VagaCreateNestedOneWithoutTicketsInput = {
+  create?: Prisma.XOR<
+    Prisma.VagaCreateWithoutTicketsInput,
+    Prisma.VagaUncheckedCreateWithoutTicketsInput
+  >;
+  connectOrCreate?: Prisma.VagaCreateOrConnectWithoutTicketsInput;
+  connect?: Prisma.VagaWhereUniqueInput;
+};
+
+export type VagaUpdateOneRequiredWithoutTicketsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.VagaCreateWithoutTicketsInput,
+    Prisma.VagaUncheckedCreateWithoutTicketsInput
+  >;
+  connectOrCreate?: Prisma.VagaCreateOrConnectWithoutTicketsInput;
+  upsert?: Prisma.VagaUpsertWithoutTicketsInput;
+  connect?: Prisma.VagaWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.VagaUpdateToOneWithWhereWithoutTicketsInput,
+      Prisma.VagaUpdateWithoutTicketsInput
+    >,
+    Prisma.VagaUncheckedUpdateWithoutTicketsInput
+  >;
+};
+
+export type VagaCreateWithoutTicketsInput = {
+  id?: string;
+  codigo: string;
+  tipo?: $Enums.TipoVaga;
+  disponivel?: boolean;
+};
+
+export type VagaUncheckedCreateWithoutTicketsInput = {
+  id?: string;
+  codigo: string;
+  tipo?: $Enums.TipoVaga;
+  disponivel?: boolean;
+};
+
+export type VagaCreateOrConnectWithoutTicketsInput = {
+  where: Prisma.VagaWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.VagaCreateWithoutTicketsInput,
+    Prisma.VagaUncheckedCreateWithoutTicketsInput
+  >;
+};
+
+export type VagaUpsertWithoutTicketsInput = {
+  update: Prisma.XOR<
+    Prisma.VagaUpdateWithoutTicketsInput,
+    Prisma.VagaUncheckedUpdateWithoutTicketsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.VagaCreateWithoutTicketsInput,
+    Prisma.VagaUncheckedCreateWithoutTicketsInput
+  >;
+  where?: Prisma.VagaWhereInput;
+};
+
+export type VagaUpdateToOneWithWhereWithoutTicketsInput = {
+  where?: Prisma.VagaWhereInput;
+  data: Prisma.XOR<
+    Prisma.VagaUpdateWithoutTicketsInput,
+    Prisma.VagaUncheckedUpdateWithoutTicketsInput
+  >;
+};
+
+export type VagaUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string;
+  tipo?: Prisma.EnumTipoVagaFieldUpdateOperationsInput | $Enums.TipoVaga;
+  disponivel?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+};
+
+export type VagaUncheckedUpdateWithoutTicketsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  codigo?: Prisma.StringFieldUpdateOperationsInput | string;
+  tipo?: Prisma.EnumTipoVagaFieldUpdateOperationsInput | $Enums.TipoVaga;
+  disponivel?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+};
+
+/**
+ * Count Type VagaCountOutputType
+ */
+
+export type VagaCountOutputType = {
+  tickets: number;
+};
+
+export type VagaCountOutputTypeSelect<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  tickets?: boolean | VagaCountOutputTypeCountTicketsArgs;
+};
+
+/**
+ * VagaCountOutputType without action
+ */
+export type VagaCountOutputTypeDefaultArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the VagaCountOutputType
+   */
+  select?: Prisma.VagaCountOutputTypeSelect<ExtArgs> | null;
+};
+
+/**
+ * VagaCountOutputType without action
+ */
+export type VagaCountOutputTypeCountTicketsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.TicketWhereInput;
+};
+
 export type VagaSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
@@ -315,6 +447,8 @@ export type VagaSelect<
     codigo?: boolean;
     tipo?: boolean;
     disponivel?: boolean;
+    tickets?: boolean | Prisma.Vaga$ticketsArgs<ExtArgs>;
+    _count?: boolean | Prisma.VagaCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["vaga"]
 >;
@@ -359,13 +493,30 @@ export type VagaOmit<
   "id" | "codigo" | "tipo" | "disponivel",
   ExtArgs["result"]["vaga"]
 >;
+export type VagaInclude<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  tickets?: boolean | Prisma.Vaga$ticketsArgs<ExtArgs>;
+  _count?: boolean | Prisma.VagaCountOutputTypeDefaultArgs<ExtArgs>;
+};
+export type VagaIncludeCreateManyAndReturn<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {};
+export type VagaIncludeUpdateManyAndReturn<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {};
 
 export type $VagaPayload<
   ExtArgs extends runtime.Types.Extensions.InternalArgs =
     runtime.Types.Extensions.DefaultArgs,
 > = {
   name: "Vaga";
-  objects: {};
+  objects: {
+    tickets: Prisma.$TicketPayload<ExtArgs>[];
+  };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
       id: string;
@@ -922,6 +1073,17 @@ export interface Prisma__VagaClient<
   GlobalOmitOptions = {},
 > extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise";
+  tickets<T extends Prisma.Vaga$ticketsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.Vaga$ticketsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$TicketPayload<ExtArgs>,
+        T,
+        "findMany",
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -987,6 +1149,10 @@ export type VagaFindUniqueArgs<
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
+  /**
    * Filter, which Vaga to fetch.
    */
   where: Prisma.VagaWhereUniqueInput;
@@ -1008,6 +1174,10 @@ export type VagaFindUniqueOrThrowArgs<
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
+  /**
    * Filter, which Vaga to fetch.
    */
   where: Prisma.VagaWhereUniqueInput;
@@ -1028,6 +1198,10 @@ export type VagaFindFirstArgs<
    * Omit specific fields from the Vaga
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
   /**
    * Filter, which Vaga to fetch.
    */
@@ -1082,6 +1256,10 @@ export type VagaFindFirstOrThrowArgs<
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
+  /**
    * Filter, which Vaga to fetch.
    */
   where?: Prisma.VagaWhereInput;
@@ -1135,6 +1313,10 @@ export type VagaFindManyArgs<
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
+  /**
    * Filter, which Vagas to fetch.
    */
   where?: Prisma.VagaWhereInput;
@@ -1187,6 +1369,10 @@ export type VagaCreateArgs<
    * Omit specific fields from the Vaga
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
   /**
    * The data needed to create a Vaga.
    */
@@ -1244,6 +1430,10 @@ export type VagaUpdateArgs<
    * Omit specific fields from the Vaga
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
   /**
    * The data needed to update a Vaga.
    */
@@ -1326,6 +1516,10 @@ export type VagaUpsertArgs<
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
+  /**
    * The filter to search for the Vaga to update in case it exists.
    */
   where: Prisma.VagaWhereUniqueInput;
@@ -1355,6 +1549,10 @@ export type VagaDeleteArgs<
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
+  /**
    * Filter which Vaga to delete.
    */
   where: Prisma.VagaWhereUniqueInput;
@@ -1378,6 +1576,35 @@ export type VagaDeleteManyArgs<
 };
 
 /**
+ * Vaga.tickets
+ */
+export type Vaga$ticketsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs =
+    runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Ticket
+   */
+  select?: Prisma.TicketSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the Ticket
+   */
+  omit?: Prisma.TicketOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketInclude<ExtArgs> | null;
+  where?: Prisma.TicketWhereInput;
+  orderBy?:
+    | Prisma.TicketOrderByWithRelationInput
+    | Prisma.TicketOrderByWithRelationInput[];
+  cursor?: Prisma.TicketWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.TicketScalarFieldEnum | Prisma.TicketScalarFieldEnum[];
+};
+
+/**
  * Vaga without action
  */
 export type VagaDefaultArgs<
@@ -1392,4 +1619,8 @@ export type VagaDefaultArgs<
    * Omit specific fields from the Vaga
    */
   omit?: Prisma.VagaOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VagaInclude<ExtArgs> | null;
 };

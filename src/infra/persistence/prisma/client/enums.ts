@@ -16,3 +16,19 @@ export const TipoVaga = {
 } as const;
 
 export type TipoVaga = (typeof TipoVaga)[keyof typeof TipoVaga];
+
+export const StatusTicket = {
+  PENDENTE: "PENDENTE",
+  PAGO: "PAGO",
+  CANCELADO: "CANCELADO",
+} as const;
+
+export type StatusTicket = (typeof StatusTicket)[keyof typeof StatusTicket];
+
+export const TipoTarifa = {
+  DIARIA: "DIARIA",
+  MENSAL: "MENSAL",
+  PRIMEIRA_HORA_MAIS_HORA_ADICIONAL: "PRIMEIRA_HORA_MAIS_HORA_ADICIONAL",
+} as const;
+
+export type TipoTarifa = (typeof TipoTarifa)[keyof typeof TipoTarifa];

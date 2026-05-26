@@ -21,3 +21,8 @@ export * from "./enums.js";
  *
  */
 export type Vaga = Prisma.VagaModel;
+/**
+ * Model Ticket
+ *
+ */
+export type Ticket = Prisma.TicketModel;

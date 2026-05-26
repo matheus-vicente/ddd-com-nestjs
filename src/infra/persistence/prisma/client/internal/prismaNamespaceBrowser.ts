@@ -55,6 +55,7 @@ export const AnyNull = runtime.AnyNull;
 
 export const ModelName = {
   Vaga: "Vaga",
+  Ticket: "Ticket",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -83,6 +84,23 @@ export const VagaScalarFieldEnum = {
 export type VagaScalarFieldEnum =
   (typeof VagaScalarFieldEnum)[keyof typeof VagaScalarFieldEnum];
 
+export const TicketScalarFieldEnum = {
+  id: "id",
+  codigo: "codigo",
+  vagaId: "vagaId",
+  status: "status",
+  placa: "placa",
+  tipoTarifa: "tipoTarifa",
+  valorTarifa: "valorTarifa",
+  valorAdicionalTarifa: "valorAdicionalTarifa",
+  valor: "valor",
+  criadoEm: "criadoEm",
+  dataDeSaida: "dataDeSaida",
+} as const;
+
+export type TicketScalarFieldEnum =
+  (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum];
+
 export const SortOrder = {
   asc: "asc",
   desc: "desc",
@@ -96,3 +114,10 @@ export const QueryMode = {
 } as const;
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode];
+
+export const NullsOrder = {
+  first: "first",
+  last: "last",
+} as const;
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder];

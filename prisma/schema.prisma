@@ -12,8 +12,27 @@ model Vaga {
   codigo     String   @unique
   tipo       TipoVaga @default(PADRAO)
   disponivel Boolean  @default(true)
+  tickets    Ticket[]
 
   @@map("vagas")
+}
+
+model Ticket {
+  id String @id @default(uuid())
+  codigo String @unique
+  vagaId String
+  status StatusTicket @default(PENDENTE)
+  placa String
+  tipoTarifa TipoTarifa @default(DIARIA)
+  valorTarifa Int
+  valorAdicionalTarifa Int
+  valor Int
+  criadoEm DateTime
+  dataDeSaida DateTime?
+
+  vaga Vaga @relation(fields: [vagaId], references: [id])
+
+  @@map("tickets")
 }
 
 enum TipoVaga {
@@ -21,4 +40,16 @@ enum TipoVaga {
   CADEIRANTE
   IDOSO
   MANUTENCAO
+}
+
+enum StatusTicket {
+  PENDENTE
+  PAGO
+  CANCELADO
+}
+
+enum TipoTarifa {
+  DIARIA
+  MENSAL
+  PRIMEIRA_HORA_MAIS_HORA_ADICIONAL
 }

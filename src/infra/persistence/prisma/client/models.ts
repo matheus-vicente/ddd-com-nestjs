@@ -8,4 +8,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from "./models/Vaga.js";
+export type * from "./models/Ticket.js";
 export type * from "./commonInputTypes.js";
