@@ -178,7 +178,7 @@ export class Ticket {
       case TipoTarifa.PRIMEIRA_HORA_MAIS_HORA_ADICIONAL: {
         if (!valorAdicional || valorAdicional < 0) {
           throw new DomainException(
-            "O campo VALOR_ADICIONAL informado para este tipo de tarifa",
+            "O campo VALOR_ADICIONAL deve ser informado para este tipo de tarifa",
           );
         }
 
