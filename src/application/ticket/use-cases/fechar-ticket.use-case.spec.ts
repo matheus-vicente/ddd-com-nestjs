@@ -14,7 +14,7 @@ import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.except
 import { TipoVaga } from "@domain/vaga/enums/tipo-vaga.enum.js";
 
 const CRIADO_EM = new Date("2024-06-01T10:00:00.000Z");
-const CLOCK_BASE = new Date("2024-06-01T12:00:00.000Z"); // 2h depois
+const CLOCK_BASE = new Date("2024-06-01T12:00:00.000Z");
 
 function criarVagaOcupada(): Vaga {
   const vaga = Vaga.create({ codigo: "A-01" });
@@ -51,7 +51,7 @@ function buildSut(
     vagasRepo,
     ticketsRepo,
     tarifaService ?? new CalcularTarifaService(),
-    clock,
+    () => clock,
   );
 }
 

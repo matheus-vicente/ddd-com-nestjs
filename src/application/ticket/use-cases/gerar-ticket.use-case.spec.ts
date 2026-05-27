@@ -25,7 +25,7 @@ function buildDTO(
 ): InfosTicketDTO {
   return new InfosTicketDTO({
     placa: "ABC-1234",
-    tipoTarifa: TipoTarifa.DIARIA,
+    tipo: TipoTarifa.DIARIA,
     valor: 50,
     ...overrides,
   });
@@ -42,7 +42,11 @@ describe("GerarTicketUseCase", () => {
     ticketsRepository = new InMemoryTicketsRepository();
     clock = new Date("2024-06-01T10:00:00.000Z");
 
-    sut = new GerarTicketUseCase(vagasRepository, ticketsRepository, clock);
+    sut = new GerarTicketUseCase(
+      vagasRepository,
+      ticketsRepository,
+      () => clock,
+    );
   });
 
   describe("quando os dados são válidos", () => {
@@ -90,7 +94,7 @@ describe("GerarTicketUseCase", () => {
       const vaga = criarVagaDisponivel();
       vagasRepository.vagas.push(vaga);
 
-      const dto = buildDTO({ tipoTarifa: TipoTarifa.MENSAL, valor: 300 });
+      const dto = buildDTO({ tipo: TipoTarifa.MENSAL, valor: 300 });
 
       const ticket = await sut.execute(vaga.id.toString(), dto);
 
@@ -102,7 +106,7 @@ describe("GerarTicketUseCase", () => {
       vagasRepository.vagas.push(vaga);
 
       const dto = buildDTO({
-        tipoTarifa: TipoTarifa.PRIMEIRA_HORA_MAIS_HORA_ADICIONAL,
+        tipo: TipoTarifa.PRIMEIRA_HORA_MAIS_HORA_ADICIONAL,
         valor: 15,
         valorAdicional: 8,
       });
@@ -180,7 +184,7 @@ describe("GerarTicketUseCase", () => {
       const sutComClock = new GerarTicketUseCase(
         vagasRepository,
         ticketsRepository,
-        dataEsperada,
+        () => dataEsperada,
       );
 
       const vaga = criarVagaDisponivel();
@@ -196,7 +200,7 @@ describe("GerarTicketUseCase", () => {
       const sutComClockFuturo = new GerarTicketUseCase(
         vagasRepository,
         ticketsRepository,
-        dataFutura,
+        () => dataFutura,
       );
 
       const vaga = criarVagaDisponivel();

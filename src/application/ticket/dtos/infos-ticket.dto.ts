@@ -4,14 +4,14 @@ import { TipoTarifa } from "@domain/ticket/enums/tipo-tarifa.enum.js";
 
 export type InfosTicketDTOType = {
   placa: string;
-  tipoTarifa: TipoTarifa;
+  tipo: TipoTarifa;
   valor: number;
   valorAdicional?: number;
 };
 
 export class InfosTicketDTO {
   private readonly _placa: string;
-  private readonly _tipoTarifa: TipoTarifa;
+  private readonly _tipo: TipoTarifa;
   private readonly _valor: number;
   private readonly _valorAdicional?: number;
 
@@ -22,7 +22,7 @@ export class InfosTicketDTO {
       throw new BadRequestException("Body inválido");
     }
 
-    const { placa, tipoTarifa, valor, valorAdicional } = data;
+    const { placa, tipo, valor, valorAdicional } = data;
 
     if (!placa || typeof placa !== "string" || placa.trim() === "") {
       message.push("O campo PLACA deve ser preenchido");
@@ -31,9 +31,8 @@ export class InfosTicketDTO {
     const tiposValidos = Object.values(TipoTarifa);
 
     if (
-      !tipoTarifa ||
-      (!!tipoTarifa &&
-        !tiposValidos.includes(tipoTarifa.toUpperCase() as TipoTarifa))
+      !tipo ||
+      (!!tipo && !tiposValidos.includes(tipo.toUpperCase() as TipoTarifa))
     ) {
       message.push(
         `O campo TIPO_TARIFA deve ser preenchido e deve ser um dos seguintes valores: ${tiposValidos.join(", ")}`,
@@ -58,7 +57,7 @@ export class InfosTicketDTO {
     }
 
     this._placa = placa;
-    this._tipoTarifa = tipoTarifa;
+    this._tipo = tipo;
     this._valor = valor;
     this._valorAdicional = valorAdicional ?? undefined;
   }
@@ -67,8 +66,8 @@ export class InfosTicketDTO {
     return this._placa;
   }
 
-  get tipoTarifa(): TipoTarifa {
-    return this._tipoTarifa;
+  get tipo(): TipoTarifa {
+    return this._tipo;
   }
 
   get valor(): number {

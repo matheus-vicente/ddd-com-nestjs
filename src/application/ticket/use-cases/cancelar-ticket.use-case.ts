@@ -1,17 +1,19 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 
 import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
 import { EntityIdUnico } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 import { Ticket } from "@domain/ticket/entities/ticket.entity.js";
 import { ITicketsRepository } from "@domain/ticket/repositories/tickets.repository.js";
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
+import { CLOCK } from "@infra/http/tokens/clock.token.js";
 
 @Injectable()
 export class CancelarTicketUseCase {
   constructor(
     private readonly vagasRepository: IVagasRepository,
     private readonly ticketsRepository: ITicketsRepository,
-    private readonly clock: Date,
+    @Inject(CLOCK)
+    private readonly clock: () => Date,
   ) {}
 
   public async execute(id: string): Promise<Ticket> {
@@ -29,8 +31,8 @@ export class CancelarTicketUseCase {
       throw new NaoEncontradoException("Vaga não encontrada");
     }
 
+    ticket.cancelar(this.clock());
     vaga.liberar();
-    ticket.cancelar(new Date(this.clock));
 
     await this.vagasRepository.salvar(vaga);
     const ticketCancelado = await this.ticketsRepository.salvar(ticket);

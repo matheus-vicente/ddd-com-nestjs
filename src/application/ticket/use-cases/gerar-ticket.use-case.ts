@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 
 import { InfosTicketDTO } from "@application/ticket/dtos/infos-ticket.dto.js";
 import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
@@ -6,25 +6,26 @@ import { EntityIdUnico } from "@domain/shared/value-objects/entity-id-unico.vo.j
 import { Ticket } from "@domain/ticket/entities/ticket.entity.js";
 import { ITicketsRepository } from "@domain/ticket/repositories/tickets.repository.js";
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
+import { CLOCK } from "@infra/http/tokens/clock.token.js";
 
 @Injectable()
 export class GerarTicketUseCase {
   constructor(
     private readonly vagasRepository: IVagasRepository,
     private readonly ticketsRepository: ITicketsRepository,
-    private readonly clock: Date,
+    @Inject(CLOCK)
+    private readonly clock: () => Date,
   ) {}
 
   public async execute(
     vagaId: string,
     ticketDTO: InfosTicketDTO,
   ): Promise<Ticket> {
-    const vaga = await this.vagasRepository.buscarPorId(
-      new EntityIdUnico(vagaId),
-    );
+    const idValido = new EntityIdUnico(vagaId);
+    const vaga = await this.vagasRepository.buscarPorId(idValido);
 
     if (!vaga) {
-      throw new NaoEncontradoException("Vaga não encontrada");
+      throw new NaoEncontradoException(`Vaga não encontrada`);
     }
 
     vaga.ocupar();
@@ -32,10 +33,10 @@ export class GerarTicketUseCase {
     const ticket = Ticket.create({
       vagaId: new EntityIdUnico(vagaId),
       placa: ticketDTO.placa,
-      tipoTarifa: ticketDTO.tipoTarifa,
+      tipoTarifa: ticketDTO.tipo,
       valor: ticketDTO.valor,
       valorAdicional: ticketDTO.valorAdicional,
-      criadoEm: new Date(this.clock),
+      criadoEm: this.clock(),
     });
 
     await this.vagasRepository.salvar(vaga);

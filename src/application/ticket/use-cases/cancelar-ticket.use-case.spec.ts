@@ -43,7 +43,7 @@ describe("CancelarTicketUseCase", () => {
     sut = new CancelarTicketUseCase(
       vagasRepository,
       ticketsRepository,
-      CLOCK_BASE,
+      () => CLOCK_BASE,
     );
   });
 
@@ -231,7 +231,7 @@ describe("CancelarTicketUseCase", () => {
       const sutComClock = new CancelarTicketUseCase(
         vagasRepository,
         ticketsRepository,
-        clockEspecifico,
+        () => clockEspecifico,
       );
 
       const vaga = criarVaga();
@@ -254,7 +254,7 @@ describe("CancelarTicketUseCase", () => {
       const sutComClockAnterior = new CancelarTicketUseCase(
         vagasRepository,
         ticketsRepository,
-        clockAnterior,
+        () => clockAnterior,
       );
 
       const vaga = criarVaga();

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 
 import { EntityIdUnico } from "@domain/shared/value-objects/entity-id-unico.vo.js";
 import { Ticket } from "@domain/ticket/entities/ticket.entity.js";
@@ -6,6 +6,7 @@ import { ITicketsRepository } from "@domain/ticket/repositories/tickets.reposito
 import { IVagasRepository } from "@domain/vaga/repositories/vagas.repository.js";
 import { NaoEncontradoException } from "@domain/exceptions/nao-encontrado.exception.js";
 import { CalcularTarifaService } from "@domain/ticket/services/calcular-tarifa.service.js";
+import { CLOCK } from "@infra/http/tokens/clock.token.js";
 
 @Injectable()
 export class FecharTicketUseCase {
@@ -13,7 +14,8 @@ export class FecharTicketUseCase {
     private readonly vagasRepository: IVagasRepository,
     private readonly ticketsRepository: ITicketsRepository,
     private readonly calcularTarifa: CalcularTarifaService,
-    private readonly clock: Date,
+    @Inject(CLOCK)
+    private readonly clock: () => Date,
   ) {}
 
   public async execute(id: string): Promise<Ticket> {
@@ -31,7 +33,7 @@ export class FecharTicketUseCase {
       throw new NaoEncontradoException("Vaga não encontrada");
     }
 
-    const dataDeSaida = this.clock;
+    const dataDeSaida = this.clock();
 
     const valor = this.calcularTarifa.calcular(ticket, dataDeSaida);
 
