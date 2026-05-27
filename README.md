@@ -1,6 +1,6 @@
-# Nest Park API
+# Nest Park
 
-Javagas é uma api REST de gerenciamento de estacionamento, a nível de estudo, construído utilizando os conceitos de DDD (Domain-Driven Design), focado em desacoplar a regra de negócio da infraestrutura.
+Nest Park é uma api REST de gerenciamento de estacionamento, a nível de estudo, construído utilizando os conceitos de DDD (Domain-Driven Design), focado em desacoplar a regra de negócio da infraestrutura.
 
 ## 🛠️ Tecnologias Utilizadas
 
